@@ -112,7 +112,7 @@ def main():
     east_pcd.paint_uniform_color([1, 0.706, 0])         # East is yellow
     west_pcd.paint_uniform_color([0, 0.651, 0.929])     # West is blue
 
-    def evaluate_registration(pc1, pc2, threshold=1.0, report_name=None):
+    def evaluate_registration(pc1, pc2, threshold=args.threshold, report_name=None):
         print('----------------------------------------------------------------------')
         print(f'Evaluation of {report_name} point clouds...')
         print(f'Using a threshold of {threshold} for evaluation')
