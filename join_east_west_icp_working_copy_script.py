@@ -45,16 +45,6 @@ def get_args():
                         type=float,
                         default= 10.0)
 
-    
-    parser.add_argument('-o',
-                        '--outdir',
-                        help='Output directory where .ply file will be saved',
-                        type=str,
-                        default= 10.0)
-
-
-
-
     args = parser.parse_args()
 
     if '/' not in args.outdir:
