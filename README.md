@@ -1,5 +1,3 @@
-# icp_point_cloud_registration
-
 # ICP Point Cloud Registration
 
 Description Placeholder
