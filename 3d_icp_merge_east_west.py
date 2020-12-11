@@ -86,7 +86,10 @@ def process_pcd(west_pcd_path, east_pcd_path):
     f_name = os.path.splitext(os.path.basename(west_pcd_path))[-2].split('__')[-2] + '_icp_merge.ply'
     out_path = os.path.join(args.outdir, f_name)
 
-    o3d.io.write_point_cloud(out_path, icp_pcd)
+    west_transform = west_pcd.transform(icp_pcd.transformation)
+    out_pcd = west_transform + east_pcd
+
+    o3d.io.write_point_cloud(out_path, out_pcd)
 
 
 # --------------------------------------------------
