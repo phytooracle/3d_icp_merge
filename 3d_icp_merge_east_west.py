@@ -108,11 +108,11 @@ def correct_png(img, is_east, meta_path):
     return img
 
 # -------------------------------------------------- Added by Ariyan 
-def merge_png_files(west_pcd_path,east_pcd_path,T):
+def merge_png_files(west_pcd_path,east_pcd_path,T, outdir):
     west_png_path = west_pcd_path.replace('.ply','_g.png')
     east_png_path = east_pcd_path.replace('.ply','_g.png')
     metadata_path = east_pcd_path.replace('__Top-heading-east_0.ply','_metadata.json')
-
+    print(west_png_path)
     img_e = cv2.imread(east_png_path)
     img_e = cv2.resize(img_e,(int(img_e.shape[1]/5),int(img_e.shape[0]/5)))
     img_e = cv2.normalize(img_e, None, 255,0, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
@@ -130,8 +130,8 @@ def merge_png_files(west_pcd_path,east_pcd_path,T):
     merged_frame = cv2.normalize(merged_frame, None, 255,0, cv2.NORM_MINMAX, cv2.CV_8UC1)
 
     merged_frame = cv2.rotate(merged_frame, cv2.ROTATE_90_CLOCKWISE)
-
-    cv2.imwrite(metadata_path.replace('_metadata.json','_merged_east_west.png'),merged_frame)
+    print()
+    cv2.imwrite(os.path.join(outdir, os.path.basename(metadata_path.replace('_metadata.json','_merged_east_west.png'))),merged_frame)
 
 
 # -------------------------------------------------- Edited by Ariyan
@@ -139,19 +139,15 @@ def process_pcd(west_pcd_path, east_pcd_path):
     args = get_args()
 
     west_pcd, east_pcd = open_paint_pcd(west_pcd_path, east_pcd_path)
-
     icp_pcd = icp_registration(west_pcd, east_pcd, args.threshold)
-
     f_name = os.path.splitext(os.path.basename(west_pcd_path))[-2].split('__')[-2] + '_icp_merge.ply'
     out_path = os.path.join(args.outdir, f_name)
-
     west_transform = west_pcd.transform(icp_pcd.transformation)
     out_pcd = west_transform + east_pcd
 
     o3d.io.write_point_cloud(out_path, out_pcd)
 
-    # added by Ariyan:
-
+    added by Ariyan:
     mins_w = np.min(np.array(west_pcd.points),axis=0)
     maxs_w = np.max(np.array(west_pcd.points),axis=0)
     
@@ -160,8 +156,7 @@ def process_pcd(west_pcd_path, east_pcd_path):
 
     translation = abs(mins_e[1]-mins_w[1])/(maxs_e[1]-mins_e[1])
 
-    merge_png_files(west_pcd_path,east_pcd_path,translation)
-
+    merge_png_files(west_pcd_path,east_pcd_path,translation, args.outdir)
 
 
 # --------------------------------------------------
