@@ -8,9 +8,8 @@ USER root
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update -y
-RUN apt-get install -y 
-                       #python3.6-dev \
-                       #python3-pip \
+RUN apt-get install -y python3.6 \
+                       python3-pip \
                        wget \
                        build-essential \
                        software-properties-common \
