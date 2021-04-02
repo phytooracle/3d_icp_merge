@@ -147,7 +147,7 @@ def process_pcd(west_pcd_path, east_pcd_path):
 
     o3d.io.write_point_cloud(out_path, out_pcd)
 
-    added by Ariyan:
+    # added by Ariyan:
     mins_w = np.min(np.array(west_pcd.points),axis=0)
     maxs_w = np.max(np.array(west_pcd.points),axis=0)
     
