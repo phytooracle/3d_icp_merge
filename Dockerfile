@@ -30,9 +30,9 @@ RUN apt-get install -y python3.6 \
                        libc6-dev \
                        liblzma-dev
 
-RUN wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
-RUN tar -xzf Python-3.8.5.tgz
-RUN cd Python-3.8.5/ && ./configure --with-ensurepip=install && make && make install
+# RUN wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
+# RUN tar -xzf Python-3.8.5.tgz
+# RUN cd Python-3.8.5/ && ./configure --with-ensurepip=install && make && make install
 
 RUN apt-get update
 #RUN apt-get install -y python3-pip
