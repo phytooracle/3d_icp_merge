@@ -8,9 +8,8 @@ USER root
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update -y
-RUN apt-get install -y 
-                       #python3.6 \
-                       #python3-pip \
+RUN apt-get install -y python3.6 \
+                       python3-pip \
                        wget \
                        build-essential \
                        software-properties-common \
@@ -31,9 +30,9 @@ RUN apt-get install -y
                        libc6-dev \
                        liblzma-dev
 
-RUN wget https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz
-RUN tar -xzf Python-3.6.13.tgz
-RUN cd Python-3.6.13/ && ./configure --with-ensurepip=install && make && make install
+# RUN wget https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz
+# RUN tar -xzf Python-3.6.13.tgz
+# RUN cd Python-3.6.13/ && ./configure --with-ensurepip=install && make && make install
 
 RUN apt-get update
 #RUN apt-get install -y python3-pip
